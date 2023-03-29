@@ -295,3 +295,7 @@ print(connexe_complet(l))
 
 bonjour = lambda a,b:a*b
 print(bonjour(3,4))
+
+
+# todo list avec un dictionnaire
+# vous ajouter
