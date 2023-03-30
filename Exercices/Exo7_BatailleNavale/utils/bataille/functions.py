@@ -1,34 +1,7 @@
-"""
+from numpy import random as rd
+from numpy import ones
 
-_*_ coding:Utf8 _*_
-
-Author:         Yoann Le Saint
-                Emmanuel Rochet
-                Lucie Potiron
-
-Project Name:   Bataille Naval
-
-Last Update:    2023-03-29
-
-Descrition: Player vs player | Player vs IA (random)
-            Initionlisation aléatoire
-            map 10x10
-            0 -> à l'eau
-            * -> zone non touchée
-            x -> touché
-
-            1 porte avion 4 cases
-            2 bateaux 2 cases
-            1 intermediaire 3 cases
-
-"""
-
-
-import numpy as np
-import random as rd
-
-
-def main():
+def affichage_menu():
     plateau_1, plateau_2 = init()
 
     print(" ____        _        _ _ _        _   _                  _      \n",
@@ -52,11 +25,12 @@ def main():
             case '3': quitter=False
             case _: print("Choix incorect, veuillez recommencer")
 
+
 def placer_bateau(plateau, taille):
     nonPlacer=True
     while(nonPlacer):
-        place = [np.random.randint(0, 9), np.random.randint(0, 9)]
-        direction = np.random.randint(0,1)
+        place = [rd.randint(0, 9), rd.randint(0, 9)]
+        direction = rd.randint(0,1)
 
         match direction:
             case 0:
@@ -79,6 +53,7 @@ def placer_bateau(plateau, taille):
 
     return plateau
 
+
 def estVide(plateau, taille, place, direction):
     match direction:
         case 0:
@@ -96,8 +71,8 @@ def init():
     #  0 -> coup pas touche
     #  1 -> bateau
     #  2 -> touche
-    plateau_1 = -1 * np.ones((10, 10))
-    plateau_2 = -1 * np.ones((10, 10))
+    plateau_1 = -1 * ones((10, 10))
+    plateau_2 = -1 * ones((10, 10))
     flotte = [4,3,2,2]
 
     for bateau in flotte:
@@ -115,7 +90,6 @@ def maj_plateau(plateau, coup_joueur):
     print("loupé !")
     plateau[coup_joueur[0], coup_joueur[1]] = 0.
     return plateau, 0
-
 
 def jouer(choix):
     score = [0,0]
@@ -164,7 +138,6 @@ def afficher(plateau_1,plateau_2,joueur):
     print("   ╚═════════════════════╝")
     print("     1 2 3 4 5 6 7 8 9 10")
 
-
 def coup(choix, plateau_1, plateau_2):
     #coup_J1
     afficher(plateau_1, plateau_2, 'A')
@@ -185,5 +158,3 @@ def coup(choix, plateau_1, plateau_2):
 
     return coup_J1, coup_J2
 
-
-main()

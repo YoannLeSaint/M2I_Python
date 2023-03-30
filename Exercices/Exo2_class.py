@@ -14,7 +14,7 @@ import random as rd
 
 
 """"
-main : initialisation main du programme - cf. entête
+main.py : initialisation main.py du programme - cf. entête
 """
 def main():
 

@@ -14,7 +14,7 @@ while (gain_2 != 3 and gain_1 != 3) and abs(gain_2 - gain_1)<3:
     main1 = input("premier joueur")
     main2 = input("deuxième joueur")
     if (main1 == main2):
-        print("Vous avez la même main")
+        print("Vous avez la même main.py")
 
     elif main1 == "pierre" and main2 == "papier":
         print("le joueur 2 gagne")

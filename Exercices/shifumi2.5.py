@@ -38,7 +38,7 @@ def intTOmain(integer):
     elif integer==3:
         return "ciseau"
     else:
-        return "erreur ce choix n'est pas possible, veuillez choisir une main correct entre\n pierre, papier et ciseau"
+        return "erreur ce choix n'est pas possible, veuillez choisir une main.py correct entre\n pierre, papier et ciseau"
 
 
 def IsOver(gain1,gain2):
@@ -65,7 +65,7 @@ def asking(display):
     return main
 
 def manche(IA):
-    #Asking main
+    #Asking main.py
     main1 = asking("Joueur 1 : ")
     if IA:
         main2 = rd.choice([1,2,3])
