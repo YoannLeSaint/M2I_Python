@@ -3,7 +3,7 @@
 _*_ coding:Utf8 _*_
 
 Author:         Yoann Le Saint
-                E
+                Emmanuel Rochet
                 Lucie Potiron
 
 Project Name:   Bataille Naval
@@ -29,7 +29,7 @@ import random as rd
 
 
 def main():
-    plateau_1, plateau2 = init()
+    plateau_1, plateau_2 = init()
 
     print(" ____        _        _ _ _        _   _                  _      \n",
           "|  _ \      | |      (_) | |      | \ | |                | |\n",
@@ -43,32 +43,56 @@ def main():
     print("Bienvenue dans votre jeu de bataille navale \n")
     print("Veuillez choisir votre mode de jeu: \n")
 
-    while(True):
-        choix = input("1) Arcade\n",
-                      "2) Versus \n",
-                      "3) Quitter\n")
-            match choix:
-                case 1: jouer(joueur(), bot())
-                case 2: jouer(joueur(), joueur())
-                case 3:
-                case _:
+    quitter = True
+    while(quitter):
+        choix = input(" 1) Arcade\n 2) Versus \n 3) Quitter\n")
+        match choix:
+            case '1': jouer(1) # bot
+            case '2': jouer(2) # vs
+            case '3': quitter=False
+            case _: print("Choix incorect, veuillez recommencer")
 
 
 
 def placer_bateau(plateau, taille):
     nonPlacer=True
     while(nonPlacer):
-        place = [np.rd.randint(0,9), np.rd.randint(0,9)]
+        place = [np.random.randint(0, 9), np.random.randint(0, 9)]
         direction = np.random.randint(0,1)
+
         match direction:
             case 0:
-                # horizontal ()
-                rand = np.random.choice([-1,1])
-
+                # horizontal
+                if place[0]+taille<10:
+                    nonPlacer = estVide(plateau, taille, place, direction)
             case 1:
                 # vertical
+                if place[1]+taille<10:
+                    nonPlacer = estVide(plateau, taille, place, direction)
+
+    # placement bateau
+    match direction:
+        case 0:
+            for i in range(taille):
+                plateau[place[0] + i, place[1]] = 1
+        case 1:
+            for i in range(taille):
+                plateau[place[0], place[1] + i] = 1
+
+    return plateau
 
 
+def estVide(plateau, taille, place, direction):
+    match direction:
+        case 0:
+            for i in range(taille):
+                if plateau[place[0]+i,place[1]] == 1:
+                    return True
+        case 1:
+            for i in range(taille):
+                if plateau[place[0], place[1]+i] == 1:
+                    return True
+    return False
 
 def init():
     # -1 -> eau
@@ -77,67 +101,103 @@ def init():
     #  2 -> touche
     plateau_1 = -1 * np.ones((10, 10))
     plateau_2 = -1 * np.ones((10, 10))
+    flotte = [4,3,2,2]
 
-
+    for bateau in flotte:
+        placer_bateau(plateau_1,bateau)
+        placer_bateau(plateau_2,bateau)
 
     return  plateau_1, plateau_2
 
+def maj_plateau(plateau, coup_joueur):
+    etat = plateau[coup_joueur[0], coup_joueur[1]]
+    if etat==1.:
+        print("Touché !")
+        plateau[coup_joueur[0], coup_joueur[1]] = 2.
+        return plateau, 1
+    print("loupé !")
+    plateau[coup_joueur[0], coup_joueur[1]] = 0.
+    return plateau, 0
 
-def jouer(j1,j2):
 
 
-def afficher(plateau1,plateau2,joueur):
+def jouer(choix):
+    score = [0,0]
+    plateau_1, plateau_2 = init()
+    while(score[0]<12 or score[1]<12):
+        coup_J1,coup_J2 = coup(int(choix), plateau_1, plateau_2)
+        plateau_1, score1 = maj_plateau(plateau_1, coup_J2)
+        plateau_2, score2 = maj_plateau(plateau_2, coup_J1)
+        score[0] += score1
+        score[1] += score2
 
-    plateau_haut = plateau1 if joueur == "B" else plateau2
-    plateau_bas = plateau2 if joueur == "B" else plateau1
-    2
-    print(" ╔═════════════════════╗\n")
 
-    for ligne  in plateau_haut:
-        print("║ ")
+def afficher(plateau_1,plateau_2,joueur):
+
+    plateau_haut = plateau_1 if joueur == "B" else plateau_2
+    plateau_bas = plateau_2 if joueur == "B" else plateau_1
+    print(f"Au joueur {joueur} de jouer :\nS")
+    print("     1 2 3 4 5 6 7 8 9 10 ")
+    print("   ╔═════════════════════╗")
+    aff = ''
+    for i, ligne in enumerate(plateau_haut):
+        if i+1!=10:
+            print(f"{i+1}  ║ ",end="")
+        else:
+            print(f"{i + 1} ║ ", end="")
         for token in ligne:
             match token:
-                case 0 : aff = "O",
-                case 2 : aff = "X",
-                case _: aff = "*"
-            print(f"{aff} ")
-        print("║\n")
-    print("╠═════════════════════╣")
-    for ligne  in plateau_haut:
-        print("║ ")
+                case 0 : aff = "O"
+                case 2 : aff = "X"
+                case _ : aff = "*"
+            print(f"{aff} ",end="")
+        print("║")
+    print("   ╠═════════════════════╣")
+    for i,ligne in enumerate(plateau_bas):
+        if i+1 != 10:
+            print(f" {i + 1} ║ ", end="")
+        else:
+            print(f"{i + 1} ║ ", end="")
         for token in ligne:
             match token:
-                case 0 : aff = "O",
-                case 1 : aff = "□",
-                case 2 : aff = "X",
-                case _: aff = "*"
-            print(f"{aff} ")
-        print("║\n")
-    print("╚═════════════════════╝")
+                case 0 : aff = "O"
+                case 1 : aff = "■"
+                case 2 : aff = "X"
+                case _ : aff = "*"
+            print(f"{aff} ", end="")
+        print("║")
+    print("   ╚═════════════════════╝")
+    print("     1 2 3 4 5 6 7 8 9 10")
 
 
 
-def coup(choix):
+def coup(choix, plateau_1, plateau_2):
     #coup_J1
-    x=input("J1, préparez votre coup.\n Sélectionnez une ligne :")
+    afficher(plateau_1, plateau_2, 'A')
+    x=input("J1, préparez votre coup.\n Sélectionnez une ligne :\n")
     y=input("Sélectionnez une colonne :")
-    coup_J1=[x,y]
+    coup_J1=[int(x)-1,int(y)-1]
     #mode versus
     if choix==2:
-        x=input("J2, préparez votre coup.\n Sélectionnez une ligne :")
+        afficher(plateau_1, plateau_2, 'B')
+        x=input("J2, préparez votre coup.\n Sélectionnez une ligne :\n")
         y=input("Sélectionnez une colonne :")
-        coup_J2=[x,y]
+        coup_J2=[int(x)-1,int(y)-1]
     #mode IA
     elif choix==1:
-        coup_IA=[rd.randint(0,9),rd.randint(0,9)]
+        print("Au tour du joueur 2.\n")
+        coup_J2=[rd.randint(0,9),rd.randint(0,9)]
+        print("Le joueur 2 a joué :", coup_J2)
 
-    return coup_J1,coup_J2,coup_IA
+    return coup_J1, coup_J2
 
 
+#
+#
+#
+# def menu()
+#     pri
+#
+#      return choix
 
-
-
-def menu()
-    pri
-
-    return choix
+main()
