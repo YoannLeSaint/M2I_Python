@@ -299,3 +299,12 @@ print(bonjour(3,4))
 
 # todo list avec un dictionnaire
 # vous ajouter
+
+
+def test(a,b):
+    print(a, b)
+
+
+test(*[1,2])
+
+

@@ -22,23 +22,23 @@ def menu():
         match tmp:
             case '1':
                 print("\n-- Addition --")
-                a,b = action()
-                res = mat.add(a,b)
+                param = action2()
+                res = mat.add2(*param)
                 affiche(res)
             case '2':
                 print("\n-- Soustraction --")
-                a, b = action()
-                res = mat.sous(a, b)
+                param = action()
+                res = mat.sous2(*param)
                 affiche(res)
             case '3':
                 print("\n-- Division --")
-                a, b = action()
-                res = mat.div(a, b)
+                param = action()
+                res = mat.div2(*param)
                 affiche(res)
             case '4':
                 print("\n-- Factoriel --")
                 a = input("Entez n :")
-                res = mat.fac(a)
+                res = mat.fac2(a)
                 affiche(res)
             case '5':
                 quit = False
@@ -47,10 +47,29 @@ def menu():
 
 
 def action():
-
     a = int(input("Entrez a :"))
     b = int(input("Entrez b : "))
     return a,b
+
+def strTOint(strint):
+    try:
+        return int(strint)
+    except:
+        return strint
+def action2():
+    quit = True
+    res = []
+    i, tmp = 0, 0
+    while(quit):
+        if tmp!='&':
+            tmp = strTOint(input(f"Entrer la valeur {i+1}, tapper '&' pour quitter"))
+            res+=[tmp]
+            i+=1
+        else:
+            quit=False
+            res.pop()
+    print(res)
+    return tuple(res)
 
 def affiche(res):
     print(f"le résultat est {res}\n")
