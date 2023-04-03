@@ -1,3 +1,3 @@
-import moteur.play as play
+import moteur.play as jeu
 
-play.play()
+jeu.menu()

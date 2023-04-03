@@ -1,4 +1,4 @@
-print(f'le résultat est => {2 ** 3 >> 1}')
+print(f"le résultat est => {2 ** 3 >> 1}")
 
 # Prix TTC de 3 article, appliquer la TVA (20%)
 # Affichage :
@@ -11,7 +11,8 @@ p1, p2, p3 = 5.5, 10, 9.99
 
 def print_ticket(prix):
     print(
-        f"Le prix de l'article HT => {prix:.2f} \n ############################### \n Le prix de l'article TTC => {prix * 1.2:.2f}\n")
+        f"Le prix de l'article HT => {prix:.2f} \n ############################### \n Le prix de l'article TTC => {prix * 1.2:.2f}\n"
+    )
 
 
 print_ticket(p1)
@@ -30,7 +31,7 @@ mystere = 5
 
 if nb == mystere:
     print("bravo c'est le bombre chiffre")
-elif (nb < mystere):
+elif nb < mystere:
     print("c'est au dessus")
 else:
     print("c'est en dessous")
@@ -39,9 +40,9 @@ mystere = 5
 bas, haut = 0, 9
 nb = -1
 
-while (nb != mystere):
+while nb != mystere:
     nb = int(input(f"Entrez un chiffre en {bas} et {haut} :"))
-    if (nb < mystere):
+    if nb < mystere:
         print("c'est au dessus")
     else:
         print("c'est en dessous")
@@ -54,7 +55,7 @@ pas = int(input("Entrez le pas"))
 
 i = 1
 print(" =================")
-while (i <= max_table):
+while i <= max_table:
     print(f" | {table} x {i} = {table * i} | ")
     i += pas
 print(" =================")
@@ -65,7 +66,7 @@ lettre = input("Donner une lettre")
 new_phrase = ""
 for i in range(len(phrase)):
     if phrase[i] == lettre:
-        new_phrase = 'X'
+        new_phrase = "X"
     else:
         new_phrase += phrase[i]
 
@@ -98,14 +99,14 @@ mystere = 5
 bas, haut = 0, 9
 nb = 0
 
-while (nb != mystere):
+while nb != mystere:
     nb = int(input(f"Entrez un chiffre en {bas} et {haut} :"))
     if nb < 0:
         print("Vous avez abandonné le jeu")
         break
-    elif (nb < mystere):
+    elif nb < mystere:
         print("c'est au dessus")
-    elif (nb > mystere):
+    elif nb > mystere:
         print("c'est en dessous")
 
 print("bravo c'est le bon chiffre")
@@ -166,9 +167,10 @@ print(somme_rec("a"))
 
 # Ecrire une fonction récursive « Binaire » permettant d’imprimer à l’écran la représentation binaire d’un nombre N.
 
+
 def rec_bin(bin):
     if bin == 0:
-        return '0b'
+        return "0b"
     else:
         return rec_bin(bin // 2) + str(bin % 2)
 
@@ -177,6 +179,7 @@ rec_bin(3)
 
 
 # ecrire la suite de Fibonacci en récursif fib(n)
+
 
 def fib(n):
     if n <= 1:
@@ -187,6 +190,7 @@ def fib(n):
 
 # la factorielle
 
+
 def fac(n):
     if n <= 1:
         return 1
@@ -196,10 +200,11 @@ def fac(n):
 
 # donner un nombre et determiner tous les nombres premiers précédents.
 
+
 def divisible(n, d):
-    if (d == 1):
+    if d == 1:
         return False
-    if (n % d == 0):
+    if n % d == 0:
         return True
     return divisible(n, d - 1)
 
@@ -231,14 +236,14 @@ def hanoi(n, A, B, C):
         hanoi(n - 1, B, A, C)
 
 
-hanoi(3, 'a', 'b', 'c')
+hanoi(3, "a", "b", "c")
 
 
 def hanoi2(n, A, B, C):
     if n == 1:
         C.append(A[-1])
         A.remove(A[-1])
-        print('A , B, C :{}\t{}\t{}'.format(A, B, C))
+        print("A , B, C :{}\t{}\t{}".format(A, B, C))
     else:
         hanoi2(n - 1, A, C, B)
         hanoi2(1, A, B, C)
@@ -262,7 +267,7 @@ La deuxième fonction est récursive. Elle reçoit la position d’un 1 dans une
 def whereOne(list):
     # return the first one in the list
     i = 0
-    while (list[i] != 1):
+    while list[i] != 1:
         i += 1
     return i
 
@@ -283,7 +288,7 @@ print(connexe(l, position))
 
 def connexe_complet(list):
     position = whereOne(list)
-    while (position != 0):
+    while position != 0:
         position = whereOne(list)
         list = connexe(list, position)
         print(list)
@@ -293,18 +298,16 @@ def connexe_complet(list):
 print(connexe_complet(l))
 
 
-bonjour = lambda a,b:a*b
-print(bonjour(3,4))
+bonjour = lambda a, b: a * b
+print(bonjour(3, 4))
 
 
 # todo list avec un dictionnaire
 # vous ajouter
 
 
-def test(a,b):
+def test(a, b):
     print(a, b)
 
 
-test(*[1,2])
-
-
+test(*[1, 2])
