@@ -1,13 +1,13 @@
 """
 une application
 
-avec un main qui propose un menu : add sous div fact quitter
+avec un main.py qui propose un menu : add sous div fact quitter
 
 quand l'utilisateur un choix il effectue l'action en fonction des parametres
 
 proposer un programme modulaire (par exemple : utils.math.<function>())
 
-vous rajoutez un main a votre fichier principal :)
+vous rajoutez un main.py a votre fichier principal :)
 """
 
 

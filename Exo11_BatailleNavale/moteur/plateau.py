@@ -103,7 +103,7 @@ class plateau:
     """
 
     def __str__(self):
-        str = "   ╔═════════════════════╗\n"
+        str = "  ╔═════════════════════╗\n"
         for i, ligne in enumerate(self.plateau):
             if i + 1 != 10:
                 str += f" {i + 1} ║ "

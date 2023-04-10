@@ -5,16 +5,18 @@ Project Name:   Bataille Navale
 
 Last Update:    2023-04-03
 
-Descrition:     main interface for playing battleships
+Descrition:     main.py interface for playing battleships
 """
 
-
-import plateau as plat
+# import plateau as plat # <- test import sur play lui-même
+import moteur.plateau as plat
+# import .plateau as plat
 import os
 
 list_lenght_boat = [2, 2, 3, 4]
 path = os.getcwd()
-path_save = "\\".join(path.split("\\")[:-1] + ["save"])
+path_save = "\\".join(path.split("\\") + ["save"])
+# path_save = "\\".join(path.split("\\")[:-1] + ["save"])  # <- test import sur play lui-même
 
 """
 menu for the battleship
@@ -38,7 +40,8 @@ def menu():
     )
     while quit:
         input_user = input(
-            "\n ================\n  Menu principal\n ================\n Entrez votre choix :\n 1) IA vs IA\n 2) Continuer une partie\n 3) Supprimer les anciennes parties\n 4) QUITTER"
+            "\n ================\n  Menu principal\n ================\n Entrez votre choix :\
+                \n 1) IA vs IA\n 2) Continuer une partie\n 3) Supprimer les anciennes parties\n 4) QUITTER\n"
         )
         match input_user:
             case "1":
@@ -103,7 +106,7 @@ def continue_to_play():
 
 
 """
-main wile loop, continue to play until one of the player had no boat
+main.py wile loop, continue to play until one of the player had no boat
 ask at ony step if you want to stop and save
 """
 def whileloop_play(plateau_1, plateau_2):
@@ -112,7 +115,7 @@ def whileloop_play(plateau_1, plateau_2):
         proceed = True
         while proceed:
             input_user2 = input(
-                "Vous voulez \n 1) Continuer\n 2) Enregistrer et quitter"
+                "Vous voulez \n 1) Continuer\n 2) Enregistrer et quitter\n"
             )
             match input_user2:
                 case "1":
@@ -129,9 +132,11 @@ def whileloop_play(plateau_1, plateau_2):
                     print("Entrée incorecte, veuillez entrer l'un des choix proposés")
 
 
+
+
 # test
 # plateau_1, plateau_2 = initialisation(list_lenght_boat)
 # print(plateau_1)
 # print(plateau_2)
 
-# menu()
+menu()

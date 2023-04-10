@@ -1,3 +1,6 @@
-import moteur.play as jeu
+# import moteur.play as jeu
+from moteur.play import *
 
-jeu.menu()
+
+if __name__ == "__main__":
+    menu()
